@@ -11,27 +11,6 @@ inputs:
     description: 'Path to the package file (artifact) you want to scan'
     required: true
 
-  rl-proxy-server:
-    description: 'An optional proxy server to use'
-    required: false
-    default: ""
-    type: string
-  rl-proxy-port:
-    description: 'An optional proxy server port to use'
-    required: false
-    default: ""
-    type: string
-  rl-proxy-user:
-    description: 'An optional proxy server user to use'
-    required: false
-    default: ""
-    type: string
-  rl-proxy-password:
-    description: 'An optional proxy server password to use'
-    required: false
-    default: ""
-    type: string
-
 outputs:
   description:
     description: 'The result of the action: a string terminating in FAIL or PASS'
@@ -49,40 +28,14 @@ runs:
       with:
         python-version: '3.14'
     
-    - name: Install Dependencies
-      run: pip install -r requirements.txt
-      shell: bash
-    
-    - name: Pass Inputs to Shell
-      run: |
-          echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
-      shell: bash
-    
-    - name: Fetch the number's square
-      id: get-square
-      run: python src/get_num_square.py
-      shell: bash
-  
-    # -------------------------------------------
-    # Set the analysis status to pending
-    - name: Set the pending status
-      uses: ouzi-dev/commit-status-updater@v2.0.2
-      with:
-        addHoldComment: "true"
-
-    # -------------------------------------
-    # Update the status from pending to failure/success and set the descriptive text
-    - name: Set the analysis status
-      if: success() || failure()
-      uses: ouzi-dev/commit-status-updater@v2.0.2
-      with:
-        addHoldComment: "true"
-        description: ${{ steps.scan.outputs.description }}
-        status: ${{ steps.scan.outputs.status }}
-
     - name: Dummy rl-protect using python
       id: scan
-
+      run: |
+        pip install rl-deploy
+        rl-deploy --version
+        echo "description=This is a message"  >> $GITHUB_OUTPUT
+        echo "status=success"                 >> $GITHUB_OUTPUT
+      shell: bash
 
     # -------------------------------------
     # Return the proper exit status
