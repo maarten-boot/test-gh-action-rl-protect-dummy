@@ -108,6 +108,7 @@ runs:
 
     # -------------------------------------
     # Run the run-scan.sh script
+    # RL_TOKEN is passed via the env already
     - name: Dummy rl-protect using python
       id: scan
       run: ${{ github.action_path }}/run-scan.sh
@@ -118,7 +119,6 @@ runs:
         RL_LOG_FILE: ${{ inputs.rl-log-file }}
         RL_CHECK_DEPS: ${{ inputs.rl-check-deps }}
         RL_CONCISE: ${{ inputs.rl-concise }}
-        RL_TOKEN: ${{ inputs.rl-token }}
         RL_SERVER: ${{ inputs.rl-server }}
         RL_PROXY_SERVER: ${{ inputs.rl-proxy-server }}
         RL_PROXY_PORT: ${{ inputs.rl-proxy-port }}
