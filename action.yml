@@ -69,7 +69,7 @@ inputs:
     required: false
     default: ""
     type: string
-    
+
   rl-return-status:
     description: 'Set command return status to fail if there is any items found'
     required: false
@@ -105,12 +105,12 @@ runs:
       uses: actions/setup-python@v6
       with:
         python-version: '3.14'
-    
+
     # -------------------------------------
     # Run the run-scan.sh script
     - name: Dummy rl-protect using python
       id: scan
-      run: ${{ github.action_path }}/run-scanner.sh
+      run: ${{ github.action_path }}/run-scan.sh
       shell: bash
       env:
         RL_ITEM_TO_SCAN: ${{ inputs.item-to-scan }}
