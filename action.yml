@@ -42,11 +42,7 @@ inputs:
     type: string
     required: false
     default: ""
-  rl-token:
-    description: 'authentication token' # will be passed as secret
-    type: string
-    required: false
-    default: ""
+  # rl-tone is passed via the env as RL_TOKEN
 
   # optional proxy
   rl-proxy-server:
