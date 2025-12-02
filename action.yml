@@ -7,9 +7,85 @@ branding:
   color: 'purple'
 
 inputs:
-  artifact-to-scan:
-    description: 'Path to the package file (artifact) you want to scan'
+  item-to-scan:
+    description: 'Path to the file or folder'
+    type: string
     required: true
+
+  profile:
+    description: 'what profile to use: org | group | file'
+    type: string
+    required: false
+    default: ""
+
+  log-file:
+    description: 'path to a log file'
+    required: false
+    default: ""
+    type: string
+
+  check-deps:
+    description: 'check dependencies'
+    required: false
+    default: ""
+    type: string
+    # values: comma separated: 'develop', 'release', 'optional', 'transitive'
+
+  concise:
+    description: 'when selecting the concise reporting is the list shortened to final outcomes only.'
+    required: false
+    default: false
+    type: bool
+
+  rl-server:
+  	description: 'the server to connect to'
+  	type: string
+  	required: false
+  	default: ""
+  rl-token:
+  	description: 'authentication token' # will be passed as secret
+  	type: string
+  	required: false
+  	default: ""
+
+  # optional proxy
+  proxy-server:
+    description: 'An optional proxy server to use'
+    required: false
+    default: ""
+    type: string
+  proxy-port:
+    description: 'An optional proxy server port to use'
+    required: false
+    default: ""
+    type: string
+  proxy-user:
+    description: 'An optional proxy server user to use'
+    required: false
+    default: ""
+    type: string
+  proxy-password:
+    description: 'An optional proxy server password to use'
+    required: false
+    default: ""
+    type: string
+    
+  return-status:
+    description: 'Set command return status to fail if there is any items found'
+    required: false
+    default: false
+    type: bool
+  no-color:
+    description: 'Do not output color to terminal or log'
+    required: false
+    default: false
+    type: bool
+
+  rl-verbose:
+    description: 'Make the scanner more verbose'
+    required: false
+    default: false
+    type: bool
 
 outputs:
   description:
@@ -36,7 +112,20 @@ runs:
         echo "description=This is a message"  >> $GITHUB_OUTPUT
         echo "status=success"                 >> $GITHUB_OUTPUT
       shell: bash
-
+    - id: scan
+      run: ${{ github.action_path }}/run-scanner.sh
+      shell: bash
+      env:
+        REPORT_PATH: ${{ inputs.report-path }}
+        MY_ARTIFACT_TO_SCAN_PATH: ${{ inputs.artifact-to-scan }}
+        RL_STORE: ${{ inputs.rl-store}}
+        RL_PACKAGE_URL: ${{ inputs.rl-package-url }}
+        RL_DIFF_WITH: ${{ inputs.rl-diff-with }}
+        RL_VERBOSE: ${{ inputs.rl-verbose }}
+        RLSECURE_PROXY_SERVER: ${{ inputs.rl-proxy-server }}
+        RLSECURE_PROXY_PORT: ${{ inputs.rl-proxy-port }}
+        RLSECURE_PROXY_USER: ${{ inputs.rl-proxy-user }}
+        RLSECURE_PROXY_PASSWORD: ${{ inputs.rl-proxy-password }}
     # -------------------------------------
     # Return the proper exit status
     - name: Set the exit status
