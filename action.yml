@@ -99,33 +99,35 @@ runs:
   using: "composite"
 
   steps:
+    # -------------------------------------
+    # install python
     - name: Install Python
       uses: actions/setup-python@v6
       with:
         python-version: '3.14'
     
+    # -------------------------------------
+    # Run the run-scan.sh script
     - name: Dummy rl-protect using python
       id: scan
-      run: |
-        pip install rl-deploy
-        rl-deploy --version
-        echo "description=This is a message"  >> $GITHUB_OUTPUT
-        echo "status=success"                 >> $GITHUB_OUTPUT
-      shell: bash
-    - id: scan
       run: ${{ github.action_path }}/run-scanner.sh
       shell: bash
       env:
-        REPORT_PATH: ${{ inputs.report-path }}
-        MY_ARTIFACT_TO_SCAN_PATH: ${{ inputs.artifact-to-scan }}
-        RL_STORE: ${{ inputs.rl-store}}
-        RL_PACKAGE_URL: ${{ inputs.rl-package-url }}
-        RL_DIFF_WITH: ${{ inputs.rl-diff-with }}
+        RL_ITEM_TO_SCAN: ${{ inputs.item-to-scan }}
+        RL_PROFILE: ${{ inputs.profile}}
+        RL_LOG_FILE: ${{ inputs.log-file }}
+        RL_CHECK_DEPS: ${{ inputs.check-deps }}
+        RL_CONCISE: ${{ inputs.concise }}
+        RL_TOKEN: ${{ inputs.rl-token }}
+        RL_SERVER: ${{ inputs.rl-server }}
+        RL_PROXY_SERVER: ${{ inputs.rl-proxy-server }}
+        RL_PROXY_PORT: ${{ inputs.rl-proxy-port }}
+        RL_PROXY_USER: ${{ inputs.rl-proxy-user }}
+        RL_PROXY_PASSWORD: ${{ inputs.rl-proxy-password }}
+        RL_RETURN_STATUS: ${{ inputs.return-status }}
+        RL_NO_COLOR: ${{ inputs.no-color }}
         RL_VERBOSE: ${{ inputs.rl-verbose }}
-        RLSECURE_PROXY_SERVER: ${{ inputs.rl-proxy-server }}
-        RLSECURE_PROXY_PORT: ${{ inputs.rl-proxy-port }}
-        RLSECURE_PROXY_USER: ${{ inputs.rl-proxy-user }}
-        RLSECURE_PROXY_PASSWORD: ${{ inputs.rl-proxy-password }}
+
     # -------------------------------------
     # Return the proper exit status
     - name: Set the exit status
