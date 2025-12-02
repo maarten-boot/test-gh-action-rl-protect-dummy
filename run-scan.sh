@@ -76,7 +76,7 @@ install_tool()
 
 show_params()
 {
-    if [ "${RL_VERBOSE}" ]
+    if [ "${RL_VERBOSE}" =="true" ]
     then
         cat <<!
 Params:
@@ -130,17 +130,17 @@ run_scan()
     # bools
     if [ "${RL_RETURN_STATUS}" == "true" ]
     then
-        PARAMS+=( --return-status=${RL_RETURN_STATUS} )
+        PARAMS+=( --return-status )
     fi
 
     if [ "${RL_NO_COLOR}" == "true" ]
     then
-        PARAMS+=( --no-color=${RL_NO_COLOR} )
+        PARAMS+=( --no-color )
     fi
 
     if [ "${RL_CONCISE}" == "true" ]
     then
-        PARAMS+=( --concise=${RL_CONCISE} )
+        PARAMS+=( --concise )
     fi
 
     # proxy
@@ -162,7 +162,7 @@ run_scan()
     fi
 
     # intercept output from 1 and 2
-    echo rl-protect ${PARAMS[@]} &2>2 | tee 1
+    echo rl-protect ${PARAMS[@]} 2>&2 | tee 1
     # extract the exit code
     RESULT_CODE=$?
 
