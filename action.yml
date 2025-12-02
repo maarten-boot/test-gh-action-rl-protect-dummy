@@ -113,19 +113,19 @@ runs:
       run: ${{ github.action_path }}/run-scan.sh
       shell: bash
       env:
-        RL_ITEM_TO_SCAN: ${{ inputs.item-to-scan }}
-        RL_PROFILE: ${{ inputs.profile}}
-        RL_LOG_FILE: ${{ inputs.log-file }}
-        RL_CHECK_DEPS: ${{ inputs.check-deps }}
-        RL_CONCISE: ${{ inputs.concise }}
+        RL_ITEM_TO_SCAN: ${{ inputs.rl-item-to-scan }}
+        RL_PROFILE: ${{ inputs.rl-profile}}
+        RL_LOG_FILE: ${{ inputs.rl-log-file }}
+        RL_CHECK_DEPS: ${{ inputs.rl-check-deps }}
+        RL_CONCISE: ${{ inputs.rl-concise }}
         RL_TOKEN: ${{ inputs.rl-token }}
         RL_SERVER: ${{ inputs.rl-server }}
         RL_PROXY_SERVER: ${{ inputs.rl-proxy-server }}
         RL_PROXY_PORT: ${{ inputs.rl-proxy-port }}
         RL_PROXY_USER: ${{ inputs.rl-proxy-user }}
         RL_PROXY_PASSWORD: ${{ inputs.rl-proxy-password }}
-        RL_RETURN_STATUS: ${{ inputs.return-status }}
-        RL_NO_COLOR: ${{ inputs.no-color }}
+        RL_RETURN_STATUS: ${{ inputs.rl-return-status }}
+        RL_NO_COLOR: ${{ inputs.rl-no-color }}
         RL_VERBOSE: ${{ inputs.rl-verbose }}
 
     # -------------------------------------
