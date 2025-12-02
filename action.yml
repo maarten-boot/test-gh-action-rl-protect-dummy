@@ -38,15 +38,15 @@ inputs:
     type: bool
 
   rl-server:
-  	description: 'the server to connect to'
-  	type: string
-  	required: false
-  	default: ""
+    description: 'the server to connect to'
+    type: string
+    required: false
+    default: ""
   rl-token:
-  	description: 'authentication token' # will be passed as secret
-  	type: string
-  	required: false
-  	default: ""
+    description: 'authentication token' # will be passed as secret
+    type: string
+    required: false
+    default: ""
 
   # optional proxy
   rl-proxy-server:
