@@ -7,31 +7,31 @@ branding:
   color: 'purple'
 
 inputs:
-  item-to-scan:
+  rl-item-to-scan:
     description: 'Path to the file or folder'
     type: string
     required: true
 
-  profile:
+  rl-profile:
     description: 'what profile to use: org | group | file'
     type: string
     required: false
     default: ""
 
-  log-file:
+  rl-log-file:
     description: 'path to a log file'
     required: false
     default: ""
     type: string
 
-  check-deps:
+  rl-check-deps:
     description: 'check dependencies'
     required: false
     default: ""
     type: string
     # values: comma separated: 'develop', 'release', 'optional', 'transitive'
 
-  concise:
+  rl-concise:
     description: 'when selecting the concise reporting is the list shortened to final outcomes only.'
     required: false
     default: false
@@ -49,33 +49,33 @@ inputs:
   	default: ""
 
   # optional proxy
-  proxy-server:
+  rl-proxy-server:
     description: 'An optional proxy server to use'
     required: false
     default: ""
     type: string
-  proxy-port:
+  rl-proxy-port:
     description: 'An optional proxy server port to use'
     required: false
     default: ""
     type: string
-  proxy-user:
+  rl-proxy-user:
     description: 'An optional proxy server user to use'
     required: false
     default: ""
     type: string
-  proxy-password:
+  rl-proxy-password:
     description: 'An optional proxy server password to use'
     required: false
     default: ""
     type: string
     
-  return-status:
+  rl-return-status:
     description: 'Set command return status to fail if there is any items found'
     required: false
     default: false
     type: bool
-  no-color:
+  rl-no-color:
     description: 'Do not output color to terminal or log'
     required: false
     default: false
