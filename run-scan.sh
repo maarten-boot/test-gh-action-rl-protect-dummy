@@ -76,7 +76,7 @@ install_tool()
 
 show_params()
 {
-    if [ "${RL_VERBOSE}" =="true" ]
+    if [ "${RL_VERBOSE}" == "true" ]
     then
         cat <<!
 Params:
