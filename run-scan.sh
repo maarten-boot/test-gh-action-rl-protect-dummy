@@ -3,7 +3,7 @@
 # bools arrive as string: 'true', 'false'
 # ints arrive as string
 
-cleanup()
+cleanup_params()
 {
     # suspicious chars are mainly `$><|&;
 
@@ -59,7 +59,7 @@ validate_proxy()
     fi
 }
 
-validate()
+validate_params()
 {
     validate_proxy
 }
@@ -74,7 +74,7 @@ install_tool()
     rl-deploy --version
 }
 
-show_params()
+show_params_if_verbose()
 {
     if [ "${RL_VERBOSE}" == "true" ]
     then
@@ -162,16 +162,13 @@ run_scan()
     fi
 
     # intercept output from 1 and 2
-    echo rl-protect ${PARAMS[@]} 2>&2 | tee 1
-    # extract the exit code
-    RESULT_CODE=$?
+    echo rl-protect scan ${PARAMS[@]} 2>2 >1
+    RESULT_CODE=$?    # extract the exit code
+    cat 1 # allways show stdout
 
     if [ "${RL_VERBOSE}" == "true" ]
     then
         echo "RESULT_CODE: ${RESULT_CODE}"
-
-        echo "Stdout:"
-        cat 1
 
         echo "Stderr:"
         cat 2
@@ -192,9 +189,9 @@ set_output()
 
 main()
 {
-    cleanup
-    validate
-    show_params # only if verbose
+    cleanup_params
+    validate_params
+    show_params_if_verbose
     install_tool
     run_scan
     set_output
